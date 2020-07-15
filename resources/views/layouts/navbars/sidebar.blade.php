@@ -82,13 +82,13 @@
 
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('home') ? 'active' : '' }}" href="{{ route('home') }}">
-                        <i class="fas fa-columns"></i> {{ __('Dashboard') }}
+                        <i class="fa fa-home"></i> {{ __('Dashboard') }}
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('station*') ? 'active' : '' }}" href="{{ route('station.index') }}">
-                        <i class="fas fa-columns"></i> {{ __('Stations') }}
+                        <i class="fa fa-columns"></i> {{ __('Stations') }}
                     </a>
                 </li>
 
@@ -171,6 +171,12 @@
                         </a>
                     </li>
                 @endif
+
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('credits') ? 'active' : '' }}" href="{{ url('credits') }}">
+                        <i class="fas fa-columns"></i> {{ __('Credits') }}
+                    </a>
+                </li>
 
             </ul>
 

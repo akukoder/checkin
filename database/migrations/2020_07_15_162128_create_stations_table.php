@@ -16,7 +16,7 @@ class CreateStationsTable extends Migration
         Schema::create('stations', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->string('logo', 200)->nullable()->default('default.png');
+            $table->string('logo', 200)->nullable()->default('laptop.png');
             $table->unsignedSmallInteger('ordering', false)->nullable()->default(0);
             $table->boolean('published')->nullable()->default(false);
             $table->timestamps();
