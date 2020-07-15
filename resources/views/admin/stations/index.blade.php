@@ -10,11 +10,11 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">{{ __('Stations') }}</h3>
+                                <h3 class="mb-0">{{ __('All Stations') }}</h3>
                             </div>
                             <div class="col-4 text-md-right">
-                                <a href="{{ route('station.create') }}" class="btn btn-sm btn-outline-info">
-                                    {{ __('Add') }}
+                                <a href="{{ route('station.create') }}" class="btn btn-sm btn-outline-info" data-toggle="tooltip" title="{{ __('Add New') }}">
+                                    <i class="fa fa-plus"></i>
                                 </a>
                             </div>
                         </div>
@@ -49,9 +49,11 @@
                                     </td>
                                     <td class="text-center">
                                         @if (! empty($station->qr_code))
-                                            <a href="#" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#modal-{{ $station->id }}">
-                                                <i class="fa fa-qrcode"></i>
-                                            </a>
+                                            <span data-toggle="modal" data-target="#modal-{{ $station->id }}">
+                                                <a href="#" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="{{ __('QR Code') }}">
+                                                    <i class="fa fa-qrcode"></i>
+                                                </a>
+                                            </span>
 
                                             <div class="modal" tabindex="-1" role="dialog" id="modal-{{ $station->id }}">
                                                 <div class="modal-dialog">
@@ -82,13 +84,23 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('station.edit', $station) }}" class="btn btn-sm btn-secondary">
+                                        <a href="{{ route('station.edit', $station) }}" data-toggle="tooltip" title="{{ __('Edit') }}" class="btn btn-sm btn-secondary">
                                             <i class="fa fa-edit"></i>
                                         </a>
 
-                                        <a href="{{ route('station.destroy', $station) }}" class="btn btn-sm btn-secondary">
+                                        <a
+                                            href="{{ route('station.destroy', $station) }}"
+                                            data-toggle="tooltip"
+                                            title="{{ __('Delete') }}"
+                                            data-target="#delete-form-{{ $station->id }}"
+                                            class="btn btn-sm btn-secondary btn-delete">
                                             <i class="fa fa-trash text-danger"></i>
                                         </a>
+
+                                        <form id="delete-form-{{ $station->id }}" action="{{ route('station.destroy', $station) }}" method="POST" style="display: none;">
+                                            @csrf
+                                            @method('delete')
+                                        </form>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -101,6 +113,6 @@
             </div>
         </div>
 
-        @include('layouts.footers.auth')
+{{--        @include('layouts.footers.auth')--}}
     </div>
 @endsection

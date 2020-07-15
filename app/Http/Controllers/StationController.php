@@ -48,7 +48,7 @@ class StationController extends Controller
         $station->qr_code = $this->generateQrCode($station);
         $station->save();
 
-        flash()->success(__('Station created!'));
+        toast(__('Station created!'), 'success');
 
         return redirect()->route('station.index');
     }
@@ -62,6 +62,11 @@ class StationController extends Controller
         return view('admin.stations.edit', compact('station'));
     }
 
+    /**
+     * @param StationStoreRequest $request
+     * @param Station $station
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(StationStoreRequest $request, Station $station)
     {
         $input = $request->all();
@@ -77,9 +82,23 @@ class StationController extends Controller
 
         $station->update($input);
 
-        flash()->success(__('Station updated!'));
+        toast(__('Station updated!'), 'success');
 
         return redirect()->route('station.index');
+    }
+
+    /**
+     * @param Station $station
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy(Station $station)
+    {
+        $station->delete();
+
+        toast(__('Station deleted!'), 'success');
+
+        return redirect()->back();
     }
 
     /**
@@ -92,9 +111,9 @@ class StationController extends Controller
         $station->qr_code = $this->generateQrCode($station);
         $station->save();
 
-        flash()->success(__('QR Code generated!'));
+        toast(__('QR Code generated!'), 'success');
 
-        return redirect()->route('station.index');
+        return redirect()->back();
     }
 
     /**

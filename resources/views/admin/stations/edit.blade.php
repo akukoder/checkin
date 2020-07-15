@@ -79,13 +79,13 @@
 
                                     <div class="col-12 col-md-8">
                                         <div class="form-check form-check-inline mt-2">
-                                            <input class="form-check-input" type="radio" name="published" id="published1" value="1" checked>
+                                            <input class="form-check-input" type="radio" name="published" id="published1" value="1" {{ $station->published == 1 ? 'checked' : '' }}>
                                             <label class="form-check-label" for="published1">
                                                 {{ __('Yes') }}
                                             </label>
                                         </div>
                                         <div class="form-check form-check-inline mt-2">
-                                            <input class="form-check-input" type="radio" name="published" id="published2" value="0">
+                                            <input class="form-check-input" type="radio" name="published" id="published2" value="0" {{ $station->published == 0 ? 'checked' : '' }}>
                                             <label class="form-check-label" for="published2">
                                                 {{ __('No') }}
                                             </label>
@@ -94,7 +94,7 @@
                                 </div>
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
+                                    <button type="submit" class="btn btn-success mt-4">{{ __('Update') }}</button>
                                 </div>
                             </div>
                         </form>
@@ -102,7 +102,5 @@
                 </div>
             </div>
         </div>
-
-        @include('layouts.footers.auth')
     </div>
 @endsection
