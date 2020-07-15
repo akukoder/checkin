@@ -21,8 +21,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('user', 'UserController', ['except' => ['show']]);
-Route::resource('station', 'StationController');
+Route::group(['prefix' => 'admin'], function () {
+
+    Route::resource('user', 'UserController', ['except' => ['show']]);
+    Route::resource('station', 'StationController');
+    Route::get('/station/{station}/generate', 'StationController@generate')
+        ->name('station.generate');
+
+});
 
 Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StationStoreRequest;
 use App\Station;
-use Illuminate\Http\Request;
+use CodeItNow\BarcodeBundle\Utils\QrCode;
 
 class StationController extends Controller
 {
@@ -43,10 +43,52 @@ class StationController extends Controller
             unset($input['logo']);
         }
 
+        $station = Station::create($input);
+
+        $station->qr_code = $this->generateQrCode($station);
+        $station->save();
+
         flash()->success(__('Station created!'));
 
-        Station::create($input);
+        return redirect()->route('station.index');
+    }
+
+    /**
+     * @param Station $station
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function generate(Station $station)
+    {
+        $station->qr_code = $this->generateQrCode($station);
+        $station->save();
+
+        flash()->success(__('QR Code generated!'));
 
         return redirect()->route('station.index');
+    }
+
+    /**
+     * @param Station $station
+     * @return string
+     * @throws \Exception
+     */
+    protected function generateQrCode(Station $station)
+    {
+        $url = config('app.url').'/station/'.$station->id;
+
+        $qrCode = new QrCode;
+        $qrCode
+            ->setText($url)
+            ->setSize(300)
+            ->setPadding(10)
+            ->setErrorCorrection('high')
+            ->setForegroundColor(array('r' => 0, 'g' => 0, 'b' => 0, 'a' => 0))
+            ->setBackgroundColor(array('r' => 255, 'g' => 255, 'b' => 255, 'a' => 0))
+            ->setLabel($station->name)
+            ->setLabelFontSize(16)
+            ->setImageType(QrCode::IMAGE_TYPE_PNG);
+
+        return 'data:'.$qrCode->getContentType().';base64,'.$qrCode->generate();
     }
 }
