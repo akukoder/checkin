@@ -6,8 +6,8 @@
         </button>
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="{{ route('home') }}">
-            <img src="{{ asset('img/logo.png', true) }}" width="">
-            <img src="{{ asset('img/logo-kaunter-zakat.png', true) }}" class="navbar-brand-img" alt="...">
+            <img src="{{ Storage::url('logo-default.png', true) }}" width="">
+            <img src="{{ Storage::url('logo-default.png', true) }}" class="navbar-brand-img" alt="...">
 
         </a>
         <!-- User -->
