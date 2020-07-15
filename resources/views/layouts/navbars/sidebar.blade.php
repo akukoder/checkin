@@ -6,9 +6,7 @@
         </button>
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="{{ route('home') }}">
-            <img src="{{ Storage::url('logo-default.png', true) }}" width="">
-            <img src="{{ Storage::url('logo-default.png', true) }}" class="navbar-brand-img" alt="...">
-
+            <img src="{{ Storage::url('logo-default-dark.png', true) }}" class="navbar-brand-img" alt="...">
         </a>
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
@@ -81,6 +79,20 @@
             {{--</form>--}}
             <!-- Navigation -->
             <ul class="navbar-nav">
+
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('home') ? 'active' : '' }}" href="{{ route('home') }}">
+                        <i class="fas fa-columns"></i> {{ __('Dashboard') }}
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('station*') ? 'active' : '' }}" href="{{ route('station.index') }}">
+                        <i class="fas fa-columns"></i> {{ __('Stations') }}
+                    </a>
+                </li>
+
+
                 @if (auth()->user()->isAdmin() OR auth()->user()->isSuperAdmin() OR auth()->user()->isPPZ())
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('transaksi/dashboard') ? 'active' : '' }}" href="{{ route('transaksi.dashboard') }}">

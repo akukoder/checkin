@@ -19,7 +19,7 @@
             @include('layouts.navbars.sidebar')
         @endauth
 
-        <div class="main-content">
+        <div class="main-content" id="app">
             @include('layouts.navbars.navbar')
 
             @yield('content')

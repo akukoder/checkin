@@ -20,3 +20,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('user', 'UserController', ['except' => ['show']]);
+Route::resource('station', 'StationController');
+Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
+Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
+Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
