@@ -23,11 +23,13 @@
             @include('layouts.navbars.navbar')
 
             @yield('content')
-        </div>
 
-        @guest()
-            @include('layouts.footers.guest')
-        @endguest
+            @guest()
+                @include('layouts.footers.guest')
+            @else
+                @include('layouts.footers.auth')
+            @endguest
+        </div>
 
         <script>
             window.confirm_delete_title = '{{ __('Are you sure?') }}'

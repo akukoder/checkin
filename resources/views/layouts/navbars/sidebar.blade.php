@@ -86,12 +86,6 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link {{ request()->is('credits') ? 'active' : '' }}" href="{{ url('credits') }}">
-                        <i class="fas fa-columns"></i> {{ __('Credits') }}
-                    </a>
-                </li>
-
             </ul>
 
         </div>
