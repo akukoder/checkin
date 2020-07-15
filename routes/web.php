@@ -21,12 +21,18 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::resource('user', 'UserController', ['except' => ['show']]);
     Route::resource('station', 'StationController');
     Route::get('/station/{station}/generate', 'StationController@generate')
         ->name('station.generate');
+
+    Route::get('/settings', 'SettingController@index')
+        ->name('setting.index');
+
+    Route::post('/settings', 'SettingController@update')
+        ->name('setting.update');
 
 });
 

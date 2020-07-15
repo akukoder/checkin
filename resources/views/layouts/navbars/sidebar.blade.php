@@ -6,7 +6,7 @@
         </button>
         <!-- Brand -->
         <a class="navbar-brand pt-0" href="{{ route('home') }}">
-            <img src="{{ Storage::url('logo-default-dark.png', true) }}" class="navbar-brand-img" alt="...">
+            <img src="{{ Storage::url(setting('site-logo-dark', 'site/logo-default-dark.png')) }}" class="navbar-brand-img" alt="...">
         </a>
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
@@ -54,7 +54,7 @@
                 <div class="row">
                     <div class="col-6 collapse-brand">
                         <a href="{{ route('home') }}">
-                            <img src="{{ Storage::url('logo-default-dark.png', true) }}">
+                            <img src="{{ Storage::url(setting('site-logo-dark', 'site/logo-default-dark.png')) }}">
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
@@ -82,7 +82,13 @@
 
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('admin/user*') ? 'active' : '' }}" href="{{ route('user.index') }}">
-                        <i class="ni ni-circle-08"></i> {{ __('Users') }}
+                        <i class="fa fa-users"></i> {{ __('Users') }}
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('admin/settings') ? 'active' : '' }}" href="{{ route('setting.index') }}">
+                        <i class="fa fa-cogs"></i> {{ __('Settings') }}
                     </a>
                 </li>
 

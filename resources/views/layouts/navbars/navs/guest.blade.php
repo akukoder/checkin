@@ -1,7 +1,7 @@
 <nav class="navbar navbar-top navbar-horizontal navbar-expand-md navbar-dark">
     <div class="container px-4">
         <a class="navbar-brand" href="{{ route('home') }}">
-            <img src="{{ Storage::url('logo-default.png') }}" />
+            <img src="{{ Storage::url(setting('site-logo-white', 'site/logo-default.png')) }}" />
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse-main" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-6 collapse-brand">
                         <a href="{{ route('home') }}">
-                            <img src="{{ asset('img/logo-kaunter-zakat-lite.png', true) }}">
+                            <img src="{{ Storage::url(setting('site-logo-white', 'site/logo-default.png')) }}" />
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
