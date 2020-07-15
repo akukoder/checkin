@@ -13,9 +13,9 @@ class StationController extends Controller
      */
     public function index()
     {
-        $stations = Station::where('published', true)->orderBy('ordering')->get();
+        $stations = Station::orderBy('ordering')->get();
 
-        return view('stations.index', compact('stations'));
+        return view('admin.stations.index', compact('stations'));
     }
 
     /**
@@ -23,7 +23,7 @@ class StationController extends Controller
      */
     public function create()
     {
-        return view('stations.create');
+        return view('admin.stations.create');
     }
 
     /**
@@ -49,6 +49,35 @@ class StationController extends Controller
         $station->save();
 
         flash()->success(__('Station created!'));
+
+        return redirect()->route('station.index');
+    }
+
+    /**
+     * @param Station $station
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit(Station $station)
+    {
+        return view('admin.stations.edit', compact('station'));
+    }
+
+    public function update(StationStoreRequest $request, Station $station)
+    {
+        $input = $request->all();
+
+        if ($request->hasFile('logo')) {
+            $filename = '';
+
+            $input['logo'] = $request->file('logo')->storeAs('logo', $filename);
+        }
+        else {
+            $input['logo'] = $station->logo;
+        }
+
+        $station->update($input);
+
+        flash()->success(__('Station updated!'));
 
         return redirect()->route('station.index');
     }

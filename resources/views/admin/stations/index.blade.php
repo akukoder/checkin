@@ -1,18 +1,7 @@
 @extends('layouts.app', ['title' => __('Stations')])
 
 @section('content')
-    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="background-image: url('{{ Storage::url('profile-cover.jpg') }}'); background-size: cover; background-position: center top;">
-        <!-- Mask -->
-        <span class="mask bg-gradient-default opacity-8"></span>
-        <!-- Header container -->
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-8">
-                    <h1 class="display-2 text-white">{{ __('Stations') }}</h1>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('partials.header', ['title' => 'Stations'])
 
     <div class="container-fluid mt--7">
         <div class="row justify-content-center">
@@ -31,13 +20,13 @@
                         </div>
                     </div>
 
+                    @if (! $stations->count())
                     <div class="card-body">
-                        @if (! $stations->count())
-                            <div class="text-center text-danger">
-                                {{ __('No station available.') }}
-                            </div>
-                        @endif
+                        <div class="text-center text-danger">
+                            {{ __('No station available.') }}
+                        </div>
                     </div>
+                    @endif
 
                     @if ($stations->count())
                     <div class="table-responsive">
