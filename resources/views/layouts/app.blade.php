@@ -31,7 +31,7 @@
 
         <script>
             window.confirm_delete_title = '{{ __('Are you sure?') }}'
-            window.confirm_delete_body = '{{ __('You won\'t be able to revert this!') }}'
+            window.confirm_delete_body = "{{ __("You cannot revert this action!") }}"
             window.confirm_delete_btn = '{{ __('Yes, delete it!') }}'
         </script>
         <script src="{{ asset('js/app.js') }}"></script>

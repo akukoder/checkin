@@ -84,7 +84,11 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('station.edit', $station) }}" data-toggle="tooltip" title="{{ __('Edit') }}" class="btn btn-sm btn-secondary">
+                                        <a
+                                            href="{{ route('station.edit', $station) }}"
+                                            data-toggle="tooltip"
+                                            title="{{ __('Edit') }}"
+                                            class="btn btn-sm btn-secondary">
                                             <i class="fa fa-edit"></i>
                                         </a>
 

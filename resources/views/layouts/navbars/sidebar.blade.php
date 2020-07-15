@@ -54,8 +54,7 @@
                 <div class="row">
                     <div class="col-6 collapse-brand">
                         <a href="{{ route('home') }}">
-                            <img src="{{ asset('img/logo-kaunter-zakat.png') }}">
-
+                            <img src="{{ Storage::url('logo-default-dark.png', true) }}">
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
@@ -66,18 +65,7 @@
                     </div>
                 </div>
             </div>
-            {{--<!-- Form -->--}}
-            {{--<form class="mt-4 mb-3 d-md-none">--}}
-                {{--<div class="input-group input-group-rounded input-group-merge">--}}
-                    {{--<input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="{{ __('Search') }}" aria-label="Search">--}}
-                    {{--<div class="input-group-prepend">--}}
-                        {{--<div class="input-group-text">--}}
-                            {{--<span class="fa fa-search"></span>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</form>--}}
-            <!-- Navigation -->
+
             <ul class="navbar-nav">
 
                 <li class="nav-item">
@@ -87,90 +75,16 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->is('station*') ? 'active' : '' }}" href="{{ route('station.index') }}">
+                    <a class="nav-link {{ request()->is('admin/station*') ? 'active' : '' }}" href="{{ route('station.index') }}">
                         <i class="fa fa-columns"></i> {{ __('Stations') }}
                     </a>
                 </li>
 
-
-                @if (auth()->user()->isAdmin() OR auth()->user()->isSuperAdmin() OR auth()->user()->isPPZ())
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('transaksi/dashboard') ? 'active' : '' }}" href="{{ route('transaksi.dashboard') }}">
-                            <i class="fas fa-columns"></i> {{ __('Dashboard') }}
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('transaksi/harian') ? 'active' : '' }}" href="{{ route('transaksi.harian') }}">
-                            <i class="fas fa-money-bill-alt"></i> {{ __('Transaksi Harian') }}
-                        </a>
-                    </li>
-                @endif
-                @if (auth()->user()->isStaff() OR auth()->user()->isSuperAdmin() OR auth()->user()->isAdmin())
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('carian/pembayar') ? 'active' : '' }}" href="{{ route('carian.pembayar') }}">
-                            <i class="ni ni-money-coins"></i> {{ __('Kaunter Zakat') }}
-                        </a>
-                    </li>
-                @endif
-                @if (auth()->user()->isStaff() OR auth()->user()->isSuperAdmin())
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('batal/resit') ? 'active' : '' }}" href="{{ route('batal.resit') }}">
-                            <i class="fas fa-ban"></i> {{ __('Batal Resit') }}
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('batal/mohon') ? 'active' : '' }}" href="{{ route('batal.mohon-batal') }}">
-                            <i class="fas fa-info"></i> {{ __('Status Batal') }}
-                        </a>
-                    </li>
-                @endif
-                @if (auth()->user()->isPPZ() OR auth()->user()->isSuperAdmin())
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('batal/senarai-batal') ? 'active' : '' }}" href="{{ route('batal.senarai-batal') }}">
-                            <i class="fas fa-search"></i> {{ __('Senarai Permohonan Batal') }}
-                        </a>
-                    </li>
-                @endif
-                @if (auth()->user()->isStaff() OR auth()->user()->isSuperAdmin())
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('tutup/harian') ? 'active' : '' }}" href="{{ route('tutup.harian') }}">
-                            <i class="ni ni-archive-2"></i> {{ __('Tutup Harian') }}
-                        </a>
-                    </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ request()->is('tutup/carian-tutup-harian') ? 'active' : '' }}" href="{{ route('tutup.carian-tutup-harian') }}">
-                                <i class="ni ni-compass-04"></i> {{ __(' Carian Tutup Harian') }}
-                            </a>
-                        </li>
-                @endif
-                @if (auth()->user()->isStaff() OR auth()->user()->isSuperAdmin() OR auth()->user()->isPPZ())
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('tutup/slip') ? 'active' : '' }}" href="{{ route('tutup.slip') }}">
-                            <i class="ni ni-cloud-download-95"></i> {{ __('Upload Slip') }}
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('tutup/slip-kredit-kad') ? 'active' : '' }}" href="{{ route('tutup.slip.kredit-card') }}">
-                            <i class="ni ni-cloud-download-95"></i> {{ __('Upload Slip (CC)') }}
-                        </a>
-                    </li>
-                @endif
-                @if (auth()->user()->isPPZ())
-                    {{--<li class="nav-item">--}}
-                        {{--<a class="nav-link {{ request()->is('tutup/index-tutup-harian') ? 'active' : '' }}" href="{{ route('tutup.index-tutup-harian') }}">--}}
-                            {{--<i class="ni ni-bullet-list-67"></i> {{ __('Senarai Tutup Harian') }}--}}
-                        {{--</a>--}}
-                    {{--</li>--}}
-                @endif
-
-                @if (auth()->user()->isSuperAdmin())
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('user*') ? 'active' : '' }}" href="{{ url('user') }}">
-                            <i class="ni ni-circle-08"></i> {{ __('User Management') }}
-                        </a>
-                    </li>
-                @endif
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->is('admin/user*') ? 'active' : '' }}" href="{{ route('user.index') }}">
+                        <i class="ni ni-circle-08"></i> {{ __('Users') }}
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('credits') ? 'active' : '' }}" href="{{ url('credits') }}">
