@@ -27,3 +27,23 @@
         >
     </div>
 </div><!-- /.form-group -->
+
+<div class="form-group row">
+    <label class="col-form-label col-md-3">
+        {{ __('Sign-in Interval') }}
+    </label>
+    <div class="col-md-3">
+        <input
+            type="number"
+            class="form-control"
+            name="sign-in-interval"
+            value="{{ old('sign-in-interval', setting('sign-in-interval', 5)) }}"
+            required
+            autofocus>
+    </div>
+    <div class="col-md-8 offset-md-3">
+        <span class="small">
+            @lang('Specify the number of minutes that you wish for each sign-in session from the same user.')
+        </span>
+    </div>
+</div><!-- /.form-group -->

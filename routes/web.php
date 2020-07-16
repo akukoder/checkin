@@ -38,7 +38,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
 });
 
-Route::get('/station/{station}', 'StationController@view')->name('station.view');
+Route::get('/sign-in/{station}', 'SignInController@form')->name('sign-in.view');
+Route::post('/sign-in/{station}', 'SignInController@store')->name('sign-in.store');
 
 Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);

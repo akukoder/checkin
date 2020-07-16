@@ -103,15 +103,6 @@ class StationController extends Controller
 
     /**
      * @param Station $station
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function view(Station $station)
-    {
-        return view('station', compact('station'));
-    }
-
-    /**
-     * @param Station $station
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
@@ -132,7 +123,7 @@ class StationController extends Controller
      */
     protected function generateQrCode(Station $station)
     {
-        $url = setting('site-url', config('app.url')).'/station/'.$station->id;
+        $url = setting('site-url', config('app.url')).'/sign-in/'.$station->id;
 
         $bgColors = $this->parseColor(setting('qrcode-background-color', 'rgb(255, 255, 255)'));
         $fgColors = $this->parseColor(setting('qrcode-foreground-color', 'rgb(0, 0, 0)'));

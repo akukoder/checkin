@@ -97,7 +97,7 @@
                                     </td>
                                     <td>
                                         <a
-                                            href="{{ route('station.view', $station) }}"
+                                            href="{{ route('sign-in.view', $station) }}"
                                             data-toggle="tooltip"
                                             title="{{ __('View') }}"
                                             target="_blank"
