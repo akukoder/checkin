@@ -103,6 +103,15 @@ class StationController extends Controller
 
     /**
      * @param Station $station
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function view(Station $station)
+    {
+        return view('station', compact('station'));
+    }
+
+    /**
+     * @param Station $station
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
@@ -123,7 +132,10 @@ class StationController extends Controller
      */
     protected function generateQrCode(Station $station)
     {
-        $url = config('app.url').'/station/'.$station->id;
+        $url = setting('site-url', config('app.url')).'/station/'.$station->id;
+
+        $bgColors = $this->parseColor(setting('qrcode-background-color', 'rgb(255, 255, 255)'));
+        $fgColors = $this->parseColor(setting('qrcode-foreground-color', 'rgb(0, 0, 0)'));
 
         $qrCode = new QrCode;
         $qrCode
@@ -131,12 +143,42 @@ class StationController extends Controller
             ->setSize(300)
             ->setPadding(10)
             ->setErrorCorrection('high')
-            ->setForegroundColor(array('r' => 0, 'g' => 0, 'b' => 0, 'a' => 0))
-            ->setBackgroundColor(array('r' => 255, 'g' => 255, 'b' => 255, 'a' => 0))
-            ->setLabel($station->name)
+            ->setForegroundColor($fgColors)
+            ->setBackgroundColor($bgColors)
             ->setLabelFontSize(16)
             ->setImageType(QrCode::IMAGE_TYPE_PNG);
 
+        if (setting('qrcode-show-label', true) == 1) {
+            $qrCode->setLabel($station->name);
+        }
+
         return 'data:'.$qrCode->getContentType().';base64,'.$qrCode->generate();
+    }
+
+    /**
+     * @param $string
+     * @return array
+     */
+    private function parseColor($string)
+    {
+        $cleaned = str_replace('rgba(', '', $string);
+        $cleaned = str_replace('rgb(', '', $cleaned);
+        $cleaned = str_replace(')', '', $cleaned);
+        $cleaned = str_replace(' ', '', $cleaned);
+
+        $colors = explode(',', $cleaned);
+
+        $data = [
+            'r' => (int) $colors[0],
+            'g' => (int) $colors[1],
+            'b' => (int) $colors[2],
+            'a' => 1,
+        ];
+
+        if (strstr($string, 'rgba')) {
+            $data['a'] = (float) $colors[3];
+        }
+
+        return $data;
     }
 }

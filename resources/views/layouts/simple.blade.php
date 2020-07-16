@@ -12,12 +12,9 @@
         @yield('styles')
     </head>
     <body class="{{ $class ?? '' }}">
-        @auth()
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-            @include('layouts.navbars.sidebar')
-        @endauth
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
 
         <div class="main-content" id="app">
             @include('layouts.navbars.navbar')
@@ -36,7 +33,6 @@
             window.confirm_delete_body = "{{ __("You cannot revert this action!") }}"
             window.confirm_delete_btn = '{{ __('Yes, delete it!') }}'
         </script>
-        @stack('js_before')
         <script src="{{ asset('js/app.js') }}"></script>
         @yield('scripts')
         @stack('js')

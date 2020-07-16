@@ -24,7 +24,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::resource('user', 'UserController', ['except' => ['show']]);
+
     Route::resource('station', 'StationController');
+
     Route::get('/station/{station}/generate', 'StationController@generate')
         ->name('station.generate');
 
@@ -35,6 +37,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
         ->name('setting.update');
 
 });
+
+Route::get('/station/{station}', 'StationController@view')->name('station.view');
 
 Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);

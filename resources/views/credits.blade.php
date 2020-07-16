@@ -1,22 +1,11 @@
-@extends('layouts.app', ['title' => __('Credits')])
+@extends('layouts.simple', ['title' => __('Credits')])
 
 @section('content')
-    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="background-image: url('{{ Storage::url('profile-cover.jpg') }}'); background-size: cover; background-position: center top;">
-        <!-- Mask -->
-        <span class="mask bg-gradient-default opacity-8"></span>
-        <!-- Header container -->
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-8">
-                    <h1 class="display-2 text-white">{{ __('Credits') }}</h1>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('partials.header', ['title' => 'Credits', 'class' => 'col-12 col-md-6'])
 
     <div class="container-fluid mt--7">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-md-6">
                 <div class="card shadow">
                     <div class="card-body">
                         <ul class="mt-3">
@@ -27,7 +16,6 @@
                             <li>Image by <a href="https://pixabay.com/users/Free-Photos-242387/" target="_blank">Free-Photos</a> from <a href="https://pixabay.com/" target="_blank">Pixabay</a></li>
                         </ul>
                     </div>
-
                 </div>
             </div>
         </div>

@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.13.1",
+        "bootstrap-colorpicker": "^3.2.0",
         "sweetalert2": "^9.17.0"
     }
 }

@@ -1,4 +1,5 @@
 require('../themes/argon/js/argon.min')
+require('bootstrap-colorpicker')
 
 import swal from 'sweetalert2'
 
@@ -26,5 +27,7 @@ $(document).ready( function () {
             }
         })
     })
+
+    $('.color-picker').colorpicker()
 
 })

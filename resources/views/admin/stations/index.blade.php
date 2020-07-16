@@ -67,7 +67,19 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <img src="{{ $station->qr_code }}" style="{{ $station->name }}" class="img-fluid">
+                                                            <div class="bg-light p-4">
+                                                                <img src="{{ $station->qr_code }}" style="{{ $station->name }}" class="img-fluid shadow">
+                                                            </div>
+
+                                                            <div class="mt-3 text-center">
+                                                                <a
+                                                                    href="{{ route('station.generate', $station) }}"
+                                                                    class="btn btn-danger"
+                                                                >
+                                                                    <i class="fa fa-refresh"></i>
+                                                                    {{ __('Re-generate QR Code') }}
+                                                                </a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -84,6 +96,15 @@
                                         @endif
                                     </td>
                                     <td>
+                                        <a
+                                            href="{{ route('station.view', $station) }}"
+                                            data-toggle="tooltip"
+                                            title="{{ __('View') }}"
+                                            target="_blank"
+                                            class="btn btn-sm btn-secondary">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+
                                         <a
                                             href="{{ route('station.edit', $station) }}"
                                             data-toggle="tooltip"
