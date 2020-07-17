@@ -17,7 +17,46 @@
                             </div>
                         </div>
                     </div>
-                    <div class="table-reponsive">
+                    <div class="card-body bg-gradient-lighter">
+                        <form action="{{ route('attendance.index', $station) }}" method="get" class="row">
+                            @csrf
+
+                            <div class="col-12 col-md-3 mb-2 mb-md-0">
+                                <input
+                                    type="text"
+                                    name="keyword"
+                                    class="form-control form-control-sm"
+                                    value="{{ $keyword }}"
+                                    placeholder="@lang('Enter keyword...')">
+                            </div>
+
+                            <div class="col-12 col-md-3 mb-2 mb-md-0">
+                                <input
+                                    type="date"
+                                    name="start"
+                                    class="form-control form-control-sm"
+                                    value="{{ $start }}">
+                            </div>
+
+                            <div class="col-12 col-md-3 mb-2 mb-md-0">
+                                <input
+                                    type="date"
+                                    name="end"
+                                    class="form-control form-control-sm"
+                                    value="{{ $end }}">
+                            </div>
+
+                            <div class="col">
+                                <button type="submit" class="btn btn-warning btn-sm">
+                                    @lang('Filter')
+                                </button>
+                                <a href="{{ route('attendance.index', $station) }}" class="btn btn-secondary btn-sm">
+                                    @lang('Reset')
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>
@@ -39,8 +78,8 @@
                                 @foreach ($attendances as $attendee)
                                 <tr>
                                     <td>{{ $count++ }}</td>
-                                    <td>{{ $attendee->name }}</td>
-                                    <td>{{ $attendee->telephone }}</td>
+                                    <td>{!! App\Helpers\Str::highlight($keyword, $attendee->name) !!}</td>
+                                    <td>{!! App\Helpers\Str::highlight($keyword, $attendee->telephone) !!}</td>
                                     <td>{{ $attendee->created_at->format('d/m/Y') }}</td>
                                     <td>{{ $attendee->created_at->format('h:i a') }}</td>
                                     <td>{{ $attendee->temperature }}</td>
@@ -62,4 +101,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready( function () {
+            $('.date-range').daterangepicker();
+        })
+    </script>
 @endsection

@@ -8,6 +8,7 @@
         <title>{{ setting('site-name', config('app.name')) }}</title>
 
         <link href="{{ asset('favicon.ico') }}" rel="icon">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
         <link type="text/css" href="{{ asset('css/app.css') }}?v=1.0.0" rel="stylesheet">
         @yield('styles')
     </head>
@@ -36,7 +37,7 @@
             window.confirm_delete_body = "{{ __("You cannot revert this action!") }}"
             window.confirm_delete_btn = '{{ __('Yes, delete it!') }}'
         </script>
-        @stack('js_before')
+        @yield('js_before')
         <script src="{{ asset('js/app.js') }}"></script>
         @yield('scripts')
         @stack('js')
