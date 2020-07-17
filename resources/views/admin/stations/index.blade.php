@@ -142,6 +142,15 @@
                                 </tr>
                                 @endforeach
                             </tbody>
+                            @if ($stations->hasPages())
+                            <tfoot>
+                                <tr>
+                                    <td class="text-center" colspan="5">
+                                        {{ $stations->withQueryString()->links() }}
+                                    </td>
+                                </tr>
+                            </tfoot>
+                            @endif
                         </table>
                     </div>
                     @endif

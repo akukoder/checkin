@@ -32,14 +32,22 @@
                     <table class="table">
                         <thead>
                             <tr>
+                                <th style="width: 30px;">#</th>
                                 <th>{{ __('Name') }}</th>
                                 <th>{{ __('Email') }}</th>
                                 <th style="width: 100px"></th>
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $count = 1;
+                                if (request()->has('page') AND request()->page > 1) {
+                                    $count = ((request()->page - 1) * setting('item-per-page', 20)) + 1;
+                                }
+                            @endphp
                             @foreach ($users as $user)
                             <tr>
+                                <td>{{ $count++ }}</td>
                                 <td>
                                     {{ $user->name }}
                                     @if (auth()->user()->id === $user->id)

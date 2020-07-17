@@ -7,14 +7,6 @@
         <div class="row justify-content-center">
             <div class="col-12 col-md-8">
                 <div class="card shadow">
-{{--                    <div class="card-header border-0">--}}
-{{--                        <div class="row align-items-center">--}}
-{{--                            <div class="col-8">--}}
-{{--                                <h3 class="mb-0">{{ __('General') }}</h3>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-
                     <div class="card-body">
                         <form action="{{ route('setting.update') }}" method="post" enctype="multipart/form-data">
                             @csrf
@@ -45,7 +37,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="nav-qrcode" role="tabpanel" aria-labelledby="nav-qrcode-tab">
                                     <div class="p-4 pt-5">
-                                        @include('admin.settings._qrcode')
+                                        @include('admin.settings._qrcode-tab')
                                     </div>
                                 </div>
                             </div>

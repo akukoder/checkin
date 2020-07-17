@@ -14,7 +14,7 @@ class StationController extends Controller
      */
     public function index()
     {
-        $stations = Station::orderBy('ordering')->get();
+        $stations = Station::orderBy('ordering')->paginate(setting('item-per-page', 20));
 
         return view('admin.stations.index', compact('stations'));
     }

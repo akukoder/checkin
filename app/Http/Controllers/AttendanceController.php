@@ -12,7 +12,7 @@ class AttendanceController extends Controller
      */
     public function index(Station $station)
     {
-        $attendances = $station->attendances()->paginate(15);
+        $attendances = $station->attendances()->paginate(setting('item-per-page', 20));
 
         return view('admin.attendances.index', compact('station', 'attendances'));
     }
