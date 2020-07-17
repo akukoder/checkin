@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StationStoreRequest;
 use App\Station;
 use CodeItNow\BarcodeBundle\Utils\QrCode;
+use Illuminate\Support\Facades\Storage;
 
 class StationController extends Controller
 {
@@ -35,9 +36,7 @@ class StationController extends Controller
         $input = $request->all();
 
         if ($request->hasFile('logo')) {
-            $filename = '';
-
-            $input['logo'] = $request->file('logo')->storeAs('logo', $filename);
+            $input['logo'] = $request->file('logo')->store('public/logo');
         }
         else {
             unset($input['logo']);
@@ -72,9 +71,11 @@ class StationController extends Controller
         $input = $request->all();
 
         if ($request->hasFile('logo')) {
-            $filename = '';
+            if ($station->logo !== 'site/laptop.png') {
+                Storage::delete($station->logo);
+            }
 
-            $input['logo'] = $request->file('logo')->storeAs('logo', $filename);
+            $input['logo'] = $request->file('logo')->store('public/logo');
         }
         else {
             $input['logo'] = $station->logo;

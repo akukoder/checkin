@@ -33,6 +33,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
+                                    <th style="width: 30px"></th>
                                     <th>{{ __('Name') }}</th>
                                     <th style="width: 120px;">{{ __('QR Code') }}</th>
                                     <th style="width: 100px;">{{ __('Status') }}</th>
@@ -42,6 +43,9 @@
                             <tbody>
                                 @foreach ($stations as $station)
                                 <tr>
+                                    <td>
+                                        <img src="{{ Storage::url($station->logo) }}" class="img-fluid" style="max-width: 30px;">
+                                    </td>
                                     <td>
                                         <a href="{{ route('station.show', $station) }}">
                                             {{ $station->name }}
