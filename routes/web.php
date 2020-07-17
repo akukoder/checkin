@@ -33,6 +33,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/station/{station}/attendances', 'AttendanceController@index')
         ->name('attendance.index');
 
+    Route::get('/station/{station}/export', 'AttendanceController@export')
+        ->name('attendance.export');
+
     Route::get('/settings', 'SettingController@index')
         ->name('setting.index');
 

@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <div class="card-body bg-gradient-lighter">
-                        <form action="{{ route('attendance.index', $station) }}" method="get" class="row">
+                        <form action="{{ route('attendance.index', $station) }}" method="get" class="row" id="form-filter">
                             @csrf
 
                             <div class="col-12 col-md-3 mb-2 mb-md-0">
@@ -50,8 +50,13 @@
                                 <button type="submit" class="btn btn-warning btn-sm">
                                     @lang('Filter')
                                 </button>
+
                                 <a href="{{ route('attendance.index', $station) }}" class="btn btn-secondary btn-sm">
                                     @lang('Reset')
+                                </a>
+
+                                <a href="{{ route('attendance.export', $station) }}" class="btn btn-success btn-export btn-sm">
+                                    @lang('Export')
                                 </a>
                             </div>
                         </form>
@@ -106,7 +111,22 @@
 @section('scripts')
     <script>
         $(document).ready( function () {
-            $('.date-range').daterangepicker();
+            $('.btn-export').click( function (e) {
+                e.preventDefault()
+
+                // Get original action
+                let action = $('#form-filter').attr('action')
+
+                $('#form-filter')
+                    .attr('action', $(this).attr('href'))
+                    .submit()
+
+                // Revert action
+                setTimeout( function () {
+                    $('#form-filter')
+                        .attr('action', action)
+                }, 1000)
+            })
         })
     </script>
 @endsection
