@@ -110,6 +110,14 @@
                                         </a>
 
                                         <a
+                                            href="{{ route('attendance.index', $station) }}"
+                                            data-toggle="tooltip"
+                                            title="{{ __('Attendances') }}"
+                                            class="btn btn-sm btn-secondary">
+                                            <i class="fa fa-users"></i>
+                                        </a>
+
+                                        <a
                                             href="{{ route('station.edit', $station) }}"
                                             data-toggle="tooltip"
                                             title="{{ __('Edit') }}"
