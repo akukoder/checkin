@@ -24,6 +24,8 @@
                                     <th style="width: 30px;">#</th>
                                     <th>@lang('Name')</th>
                                     <th>@lang('Telephone')</th>
+                                    <th>@lang('Date')</th>
+                                    <th>@lang('Time')</th>
                                     <th style="width: 100px;">@lang('Temperature')</th>
                                 </tr>
                             </thead>
@@ -39,6 +41,8 @@
                                     <td>{{ $count++ }}</td>
                                     <td>{{ $attendee->name }}</td>
                                     <td>{{ $attendee->telephone }}</td>
+                                    <td>{{ $attendee->created_at->format('d/m/Y') }}</td>
+                                    <td>{{ $attendee->created_at->format('h:i a') }}</td>
                                     <td>{{ $attendee->temperature }}</td>
                                 </tr>
                                 @endforeach
@@ -46,7 +50,7 @@
                             @if ($attendances->hasPages())
                             <tfoot>
                                 <tr>
-                                    <td class="text-center" colspan="4">
+                                    <td class="text-center" colspan="6">
                                         {{ $attendances->withQueryString()->links() }}
                                     </td>
                                 </tr>
