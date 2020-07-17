@@ -5,7 +5,7 @@
 
     <div class="container-fluid mt--7">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-8">
                 <div class="card bg-secondary shadow">
                     <div class="card-header bg-white border-0">
                         <div class="row align-items-center">
@@ -61,7 +61,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="table-responsive">
+                    <div class="table-responsive bg-white">
                         <table class="table">
                             <thead>
                                 <tr>

@@ -14,24 +14,24 @@ class AttendanceTableSeeder extends Seeder
     {
         \Illuminate\Support\Facades\DB::table('attendances')->truncate();
 
-        $day = 20;
+        $day = 30;
 
-        $stations = \App\Station::get();
+        $stations = \App\Station::pluck('id');
+        $carbon = \Illuminate\Support\Carbon::parse('2020-06-20');
 
-        foreach ($stations as $station) {
-            for ($x = 0; $x < rand(50, 200); $x++) {
-                $carbon = \Illuminate\Support\Carbon::now();
+        $rand = rand(50, 200);
 
-                $date = $carbon->subDays($day--);
+        $faker = Faker::create();
 
-                $faker = Faker::create();
+        for ($d = 0; $d < $day; $d++) {
+            $date = $carbon->addDay();
 
-
+            for ($x = 0; $x < $rand; $x++) {
                 \App\Attendance::create([
                     'name' => $faker->name,
                     'telephone' => $faker->e164PhoneNumber,
                     'temperature' => rand(35, 37),
-                    'station_id' => $station->id,
+                    'station_id' => $stations[rand(0, count($stations) - 1)],
                     'created_at' => $date,
                     'updated_at' => $date,
                 ]);
