@@ -91,15 +91,23 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-                            @if ($attendances->hasPages())
+
                             <tfoot>
-                                <tr>
+                                @if ($attendances->hasPages())
+                                <tr class="bg-gradient-lighter">
                                     <td class="text-center" colspan="6">
                                         {{ $attendances->withQueryString()->links() }}
                                     </td>
                                 </tr>
+                                @endif
+
+                                <tr>
+                                    <td class="text-center" colspan="6">
+                                        @lang('Total: ') {{ $total }} @lang('records')
+                                    </td>
+                                </tr>
                             </tfoot>
-                            @endif
+
                         </table>
                     </div>
                 </div>

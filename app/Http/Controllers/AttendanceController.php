@@ -20,11 +20,13 @@ class AttendanceController extends Controller
         $start = request()->input('start', date('Y-m-d'));
         $end = request()->input('end', date('Y-m-d'));
 
-        $attendances = $this
-            ->query($station, $start, $end, $keyword)
-            ->paginate(setting('item-per-page', 20));
+        $query = $this->query($station, $start, $end, $keyword);
+        $total = $query->count();
+        $attendances = $query->paginate(setting('item-per-page', 20));
 
-        return view('admin.attendances.index', compact('station', 'attendances', 'start', 'end', 'keyword'));
+        return view('admin.attendances.index', compact(
+            'station', 'attendances', 'start', 'end', 'keyword', 'total'
+        ));
     }
 
     /**
