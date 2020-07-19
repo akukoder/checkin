@@ -11,7 +11,7 @@
                 <a href="https://www.syahzul.com" class="nav-link" target="_blank">CheckIn</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('docs.index') }}" class="nav-link">
                     {{ __('Documentation') }}
                 </a>
             </li>

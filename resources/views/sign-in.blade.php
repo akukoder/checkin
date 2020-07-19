@@ -8,7 +8,7 @@
         <div class="container-fluid">
             @include('partials.flash')
             <div class="row justify-content-center">
-                <div class="col-12 col-md-4 text-center">
+                <div class="col-12 col-md-6 text-center">
                     <img src="{{ Storage::url($station->logo) }}" class="img-fluid" style="max-width: 200px">
                 </div>
             </div>
@@ -17,7 +17,7 @@
 
     <div class="container-fluid mt--7">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-md-6">
                 <div class="card shadow mb-3">
                     <div class="card-header border-0">
                         <div class="row align-items-center">

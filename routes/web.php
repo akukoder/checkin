@@ -45,7 +45,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('/settings', 'SettingController@update')
         ->name('setting.update');
 
-    Route::post('/docs', 'DocsController@index')
+    Route::get('/docs', 'DocsController@index')
         ->name('docs.index');
 
 });
