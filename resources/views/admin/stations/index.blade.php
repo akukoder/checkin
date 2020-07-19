@@ -35,6 +35,7 @@
                                 <tr>
                                     <th style="width: 30px"></th>
                                     <th>{{ __('Name') }}</th>
+                                    <th style="width: 120px;">{{ __('Today') }}</th>
                                     <th style="width: 120px;">{{ __('QR Code') }}</th>
                                     <th style="width: 100px;">{{ __('Status') }}</th>
                                     <th style="width: 200px;"></th>
@@ -49,6 +50,11 @@
                                     <td>
                                         <a href="{{ route('station.show', $station) }}">
                                             {{ $station->name }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('attendance.index', $station) }}">
+                                            {{ $station->attendances->count() }}
                                         </a>
                                     </td>
                                     <td class="text-center">
