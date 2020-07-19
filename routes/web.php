@@ -33,17 +33,20 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/station/{station}/statistics', 'StationController@statistics')
         ->name('station.stats');
 
-    Route::get('/station/{station}/attendances', 'AttendanceController@index')
-        ->name('attendance.index');
-
     Route::get('/station/{station}/export', 'AttendanceController@export')
         ->name('attendance.export');
+
+    Route::get('/attendance/{station}/attendances', 'AttendanceController@index')
+        ->name('attendance.index');
 
     Route::get('/settings', 'SettingController@index')
         ->name('setting.index');
 
     Route::post('/settings', 'SettingController@update')
         ->name('setting.update');
+
+    Route::post('/docs', 'DocsController@index')
+        ->name('docs.index');
 
 });
 

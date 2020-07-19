@@ -17,18 +17,18 @@
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
-            @include('layouts.navbars.sidebar')
+            @include('partials.sidebar')
         @endauth
 
         <div class="main-content" id="app">
-            @include('layouts.navbars.navbar')
+            @include('partials.navbar')
 
             @yield('content')
 
             @guest()
-                @include('layouts.footers.guest')
+                @include('partials.footers.guest')
             @else
-                @include('layouts.footers.auth')
+                @include('partials.footers.auth')
             @endguest
         </div>
 
