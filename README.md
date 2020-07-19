@@ -9,6 +9,7 @@ Please refer to Laravel requirements here: [Server Requirements](https://laravel
 # Installation
 
 - Clone the repo
+- Run `composer install`
 - Run `cp .env.example .env`
 - Set your database detail in `.env`
 - Run `php artisan migrate`
