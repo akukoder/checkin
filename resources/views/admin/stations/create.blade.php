@@ -64,7 +64,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label class="form-control-label col-form-label col-12 col-md-3" for="input-logo">{{ __('Published') }}</label>
+                                    <label class="form-control-label col-form-label col-12 col-md-3" for="input-logo">{{ __('Active') }}</label>
 
                                     <div class="col-12 col-md-8">
                                         <div class="form-check form-check-inline mt-2">

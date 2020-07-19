@@ -20,6 +20,7 @@ class CreateAttendancesTable extends Migration
             $table->decimal('temperature')->nullable();
             $table->unsignedBigInteger('station_id', false)->foreign('station_id')->references('id')->on('stations');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

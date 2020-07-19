@@ -30,6 +30,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/station/{station}/generate', 'StationController@generate')
         ->name('station.generate');
 
+    Route::get('/station/{station}/statistics', 'StationController@statistics')
+        ->name('station.stats');
+
     Route::get('/station/{station}/attendances', 'AttendanceController@index')
         ->name('attendance.index');
 

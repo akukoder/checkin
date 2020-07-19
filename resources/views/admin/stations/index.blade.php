@@ -37,7 +37,7 @@
                                     <th>{{ __('Name') }}</th>
                                     <th style="width: 120px;">{{ __('QR Code') }}</th>
                                     <th style="width: 100px;">{{ __('Status') }}</th>
-                                    <th style="width: 120px;"></th>
+                                    <th style="width: 200px;"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -94,45 +94,53 @@
                                     </td>
                                     <td class="text-center">
                                         @if ($station->published)
-                                            <i class="fa fa-check text-success"></i>
+                                            <i
+                                                class="fa fa-check text-success"
+                                                data-toggle="tooltip"
+                                                title="{{ __('Active') }}"></i>
                                         @else
-                                            <i class="fa fa-times text-danger"></i>
+                                            <i
+                                                class="fa fa-times text-danger"
+                                                data-toggle="tooltip"
+                                                title="{{ __('In-active') }}"></i>
                                         @endif
                                     </td>
                                     <td>
                                         <a
-                                            href="{{ route('sign-in.view', $station) }}"
-                                            data-toggle="tooltip"
-                                            title="{{ __('View') }}"
-                                            target="_blank"
-                                            class="btn btn-sm btn-secondary">
-                                            <i class="fa fa-eye"></i>
-                                        </a>
-
-                                        <a
                                             href="{{ route('attendance.index', $station) }}"
                                             data-toggle="tooltip"
-                                            title="{{ __('Attendances') }}"
+                                            title="{{ __('Records') }}"
                                             class="btn btn-sm btn-secondary">
                                             <i class="fa fa-users"></i>
                                         </a>
 
-                                        <a
-                                            href="{{ route('station.edit', $station) }}"
-                                            data-toggle="tooltip"
-                                            title="{{ __('Edit') }}"
-                                            class="btn btn-sm btn-secondary">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <a
+                                                href="{{ route('sign-in.view', $station) }}"
+                                                data-toggle="tooltip"
+                                                title="{{ __('View Page') }}"
+                                                target="_blank"
+                                                class="btn btn-sm btn-secondary">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
 
-                                        <a
-                                            href="{{ route('station.destroy', $station) }}"
-                                            data-toggle="tooltip"
-                                            title="{{ __('Delete') }}"
-                                            data-target="#delete-form-{{ $station->id }}"
-                                            class="btn btn-sm btn-secondary btn-delete">
-                                            <i class="fa fa-trash text-danger"></i>
-                                        </a>
+                                            <a
+                                                href="{{ route('station.edit', $station) }}"
+                                                data-toggle="tooltip"
+                                                title="{{ __('Edit') }}"
+                                                class="btn btn-sm btn-secondary">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+
+                                            <a
+                                                href="{{ route('station.destroy', $station) }}"
+                                                data-toggle="tooltip"
+                                                title="{{ __('Delete') }}"
+                                                data-target="#delete-form-{{ $station->id }}"
+                                                class="btn btn-sm btn-secondary btn-delete">
+                                                <i class="fa fa-trash text-danger"></i>
+                                            </a>
+                                        </div>
 
                                         <form id="delete-form-{{ $station->id }}" action="{{ route('station.destroy', $station) }}" method="POST" style="display: none;">
                                             @csrf

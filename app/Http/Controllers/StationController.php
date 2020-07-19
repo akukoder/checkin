@@ -14,7 +14,8 @@ class StationController extends Controller
      */
     public function index()
     {
-        $stations = Station::orderBy('ordering')->paginate(setting('item-per-page', 20));
+        $stations = Station::orderBy('ordering')
+            ->paginate(setting('item-per-page', 20));
 
         return view('admin.stations.index', compact('stations'));
     }
@@ -95,6 +96,7 @@ class StationController extends Controller
      */
     public function destroy(Station $station)
     {
+        $station->attendances()->delete();
         $station->delete();
 
         toast(__('Station deleted!'), 'success');
