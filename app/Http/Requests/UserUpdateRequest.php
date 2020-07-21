@@ -26,6 +26,19 @@ class UserUpdateRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$this->user->id],
+            'roles' => ['required']
+        ];
+    }
+
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'roles.required' => __('Please select at least ONE role for this user')
         ];
     }
 }

@@ -1,7 +1,7 @@
-@extends('layouts.app', ['title' => __('Users')])
+@extends('layouts.app', ['title' => __('Roles')])
 
 @section('content')
-    @include('partials.header', ['title' => 'Users'])
+    @include('partials.header', ['title' => 'Roles'])
 
     <div class="container-fluid mt--7">
         <div class="row justify-content-center">
@@ -10,32 +10,30 @@
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col-8">
-                                <h3 class="mb-0">{{ __('All Users') }}</h3>
+                                <h3 class="mb-0">{{ __('All Roles') }}</h3>
                             </div>
                             <div class="col-4 text-md-right">
-                                <a href="{{ route('user.create') }}" class="btn btn-sm btn-outline-info" data-toggle="tooltip" title="{{ __('Add New') }}">
+                                <a href="{{ route('role.create') }}" class="btn btn-sm btn-outline-info" data-toggle="tooltip" title="{{ __('Add New') }}">
                                     <i class="fa fa-plus"></i>
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    @if (! $users->count())
+                    @if (! $roles->count())
                         <div class="card-body">
                             <div class="text-center text-danger">
-                                {{ __('No user available.') }}
+                                {{ __('No role available.') }}
                             </div>
                         </div>
                     @endif
 
-                    @if ($users->count())
+                    @if ($roles->count())
                     <table class="table">
                         <thead>
                             <tr>
                                 <th style="width: 30px;">#</th>
                                 <th>{{ __('Name') }}</th>
-                                <th>{{ __('Email') }}</th>
-                                <th>{{ __('Roles') }}</th>
                                 <th style="width: 100px"></th>
                             </tr>
                         </thead>
@@ -46,41 +44,30 @@
                                     $count = ((request()->page - 1) * setting('item-per-page', 20)) + 1;
                                 }
                             @endphp
-                            @foreach ($users as $user)
+                            @foreach ($roles as $role)
                             <tr>
                                 <td>{{ $count++ }}</td>
-                                <td>
-                                    {{ $user->name }}
-                                    @if (auth()->user()->id === $user->id)
-                                        <span class="badge badge-danger ml-2">{{ __('You') }}</span>
-                                    @endif
-                                </td>
-                                <td>{{ $user->email }}</td>
-                                <td>
-                                    {{ $user->role_list }}
-                                </td>
+                                <td>{{ $role->name }}</td>
                                 <td>
                                     <a
-                                        href="{{ route('user.edit', $user) }}"
+                                        href="{{ route('role.edit', $role) }}"
                                         data-toggle="tooltip"
                                         title="{{ __('Edit') }}"
                                         class="btn btn-sm btn-secondary">
                                         <i class="fa fa-edit"></i>
                                     </a>
 
-                                    @if (auth()->user()->id !== $user->id)
                                     <a
-                                        href="{{ route('user.destroy', $user) }}"
+                                        href="{{ route('role.destroy', $role) }}"
                                         class="btn btn-sm btn-secondary btn-delete"
                                         data-toggle="tooltip"
                                         title="{{ __('Delete') }}"
-                                        data-target="#user-form-{{ $user->id }}"
+                                        data-target="#role-form-{{ $role->id }}"
                                     >
                                         <i class="fa fa-trash text-danger"></i>
                                     </a>
-                                    @endif
 
-                                    <form id="user-form-{{ $user->id }}" action="{{ route('user.destroy', $user) }}" method="POST" style="display: none;">
+                                    <form id="role-form-{{ $role->id }}" action="{{ route('role.destroy', $role) }}" method="POST" style="display: none;">
                                         @csrf
                                         @method('delete')
                                     </form>
@@ -88,11 +75,11 @@
                             </tr>
                             @endforeach
                         </tbody>
-                        @if ($users->hasPages())
+                        @if ($roles->hasPages())
                         <tfoot>
                             <tr>
-                                <td class="text-center" colspan="5">
-                                    {{ $users->withQueryString()->links() }}
+                                <td class="text-center" colspan="3">
+                                    {{ $roles->withQueryString()->links() }}
                                 </td>
                             </tr>
                         </tfoot>

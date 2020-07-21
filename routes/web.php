@@ -25,6 +25,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::resource('user', 'UserController', ['except' => ['show']]);
 
+    Route::resource('role', 'RoleController');
+
     Route::resource('station', 'StationController');
 
     Route::get('/station/{station}/generate', 'StationController@generate')

@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasRoles, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -37,38 +38,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function isSuperAdmin()
+    /**
+     * @return string
+     */
+    public function getRoleListAttribute()
     {
-        if ($this->role == 1) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function isAdmin()
-    {
-        if ($this->role == 2) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function isStaff()
-    {
-        if ($this->role == 3) {
-            return true;
-        }
-
-        return false;
-    }
-    public function isPpz()
-    {
-        if ($this->role == 4) {
-            return true;
-        }
-
-        return false;
+        return implode(', ', $this->getRoleNames()->toArray());
     }
 }

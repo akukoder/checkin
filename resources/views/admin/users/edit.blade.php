@@ -66,6 +66,33 @@
                                 </div>
                             </div><!-- /.form-group -->
 
+                            <div class="form-group row @error('roles') is-invalid @enderror">
+                                <label class="col-form-label col-12 col-md-3">{{ __('Roles') }}</label>
+                                <div class="col-12 col-md-5 pt-2">
+                                    @foreach ($roles as $id => $name)
+                                    <div class="form-check">
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            name="roles[]"
+                                            value="{{ $id }}"
+                                            {{ $user->hasRole($name) ? 'checked' : '' }}
+                                            id="roleCheck{{ $id }}">
+                                        <label class="form-check-label" for="roleCheck{{ $id }}">
+                                            {{ $name }}
+                                        </label>
+                                    </div>
+                                    @endforeach
+                                </div>
+                                @if ($errors->has('roles'))
+                                <div class="col-12 col-md-8 offset-md-3">
+                                    <span class="invalid-feedback" style="display: block;" role="alert">
+                                        <strong>{{ $errors->first('roles') }}</strong>
+                                    </span>
+                                </div>
+                                @endif
+                            </div><!-- /.form-group -->
+
                             <div class="text-center">
                                 <button type="submit" class="btn btn-success mt-4">{{ __('Update') }}</button>
                             </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $roles = Role::pluck('name', 'id');
+
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
@@ -34,11 +37,13 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request)
     {
-        $input = $request->all();
+        $input = $request->except('roles');
 
         $input['password'] = bcrypt($input['password']);
 
-        User::create($input);
+        $user = User::create($input);
+
+        $user->syncRoles($request->input('roles'));
 
         toast(__('User created!'), 'success');
 
@@ -51,7 +56,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('admin.users.edit', compact('user'));
+        $roles = Role::pluck('name', 'id');
+
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -61,7 +68,7 @@ class UserController extends Controller
      */
     public function update(UserUpdateRequest $request, User $user)
     {
-        $input = $request->all();
+        $input = $request->except('roles');
 
         if (! $request->has('password') OR empty($request->input('password'))) {
             unset($input['password']);
@@ -70,11 +77,9 @@ class UserController extends Controller
             $input['password'] = bcrypt($input['password']);
         }
 
-        if (! $request->has('admin') OR empty($request->input('admin'))) {
-            $input['admin'] = false;
-        }
-
         $user->update($input);
+
+        $user->syncRoles($request->input('roles'));
 
         toast(__('User updated!'), 'success');
 

@@ -75,6 +75,12 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link {{ request()->is('admin/role*') ? 'active' : '' }}" href="{{ route('role.index') }}">
+                        <i class="fa fa-user-cog"></i> {{ __('Roles') }}
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link {{ request()->is('admin/settings') ? 'active' : '' }}" href="{{ route('setting.index') }}">
                         <i class="fa fa-cogs"></i> {{ __('Settings') }}
                     </a>
