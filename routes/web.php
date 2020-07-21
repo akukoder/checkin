@@ -19,33 +19,46 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::impersonate();
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
-    Route::resource('user', 'UserController', ['except' => ['show']]);
-    Route::resource('permission', 'PermissionController');
-    Route::resource('role', 'RoleController');
-    Route::resource('station', 'StationController');
-    Route::impersonate();
+    Route::resource('user', 'UserController', ['except' => ['show']])
+        ->middleware('permission:manage-users');
 
-    Route::get('/station/{station}/generate', 'StationController@generate')
-        ->name('station.generate');
+    Route::resource('permission', 'PermissionController')
+        ->middleware('permission:manage-permissions');
 
-    Route::get('/station/{station}/statistics', 'StationController@statistics')
-        ->name('station.stats');
+    Route::resource('role', 'RoleController')
+        ->middleware('permission:manage-roles');
 
-    Route::get('/station/{station}/export', 'AttendanceController@export')
-        ->name('attendance.export');
+    Route::group(['middleware' => 'permission:manage-stations'], function () {
+        Route::resource('station', 'StationController');
 
-    Route::get('/attendance/{station}/attendances', 'AttendanceController@index')
-        ->name('attendance.index');
+        Route::get('/station/{station}/generate', 'StationController@generate')
+            ->name('station.generate');
 
-    Route::get('/settings', 'SettingController@index')
-        ->name('setting.index');
+        Route::get('/station/{station}/statistics', 'StationController@statistics')
+            ->name('station.stats');
+    });
 
-    Route::post('/settings', 'SettingController@update')
-        ->name('setting.update');
+    Route::group(['middleware' => 'permission:view-attendances'], function () {
+        Route::get('/station/{station}/export', 'AttendanceController@export')
+            ->name('attendance.export');
+
+        Route::get('/attendance/{station}/attendances', 'AttendanceController@index')
+            ->name('attendance.index');
+    });
+
+    Route::group(['middleware' => 'permission:manage-settings'], function () {
+        Route::get('/settings', 'SettingController@index')
+            ->name('setting.index');
+
+        Route::post('/settings', 'SettingController@update')
+            ->name('setting.update');
+    });
 
     Route::get('/docs', 'DocsController@index')
         ->name('docs.index');
@@ -55,8 +68,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 Route::get('/sign-in/{station}', 'SignInController@form')->name('sign-in.view');
 Route::post('/sign-in/{station}', 'SignInController@store')->name('sign-in.store');
 
-Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
-Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
-Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
+    Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
+    Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+});
 
 Route::view('credits', 'credits');
