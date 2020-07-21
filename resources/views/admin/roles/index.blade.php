@@ -1,11 +1,11 @@
 @extends('layouts.app', ['title' => __('Roles')])
 
 @section('content')
-    @include('partials.header', ['title' => 'Roles'])
+    @include('partials.header', ['title' => 'Roles', 'class' => 'col-12 col-md-10'])
 
     <div class="container-fluid mt--7">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-md-10">
                 <div class="card shadow">
                     <div class="card-header border-0">
                         <div class="row align-items-center">
@@ -78,7 +78,7 @@
                         @if ($roles->hasPages())
                         <tfoot>
                             <tr>
-                                <td class="text-center" colspan="3">
+                                <td class="text-center" colspan="4">
                                     {{ $roles->withQueryString()->links() }}
                                 </td>
                             </tr>

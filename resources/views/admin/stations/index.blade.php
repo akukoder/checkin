@@ -1,11 +1,11 @@
 @extends('layouts.app', ['title' => __('Stations')])
 
 @section('content')
-    @include('partials.header', ['title' => 'Stations'])
+    @include('partials.header', ['title' => 'Stations', 'class' => 'col-12 col-md-10'])
 
     <div class="container-fluid mt--7">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-md-10">
                 <div class="card shadow">
                     <div class="card-header border-0">
                         <div class="row align-items-center">
@@ -117,7 +117,7 @@
                                             data-toggle="tooltip"
                                             title="{{ __('Records') }}"
                                             class="btn btn-sm btn-secondary">
-                                            <i class="fa fa-users"></i>
+                                            <i class="fa fa-user-check"></i>
                                         </a>
 
                                         <div class="btn-group" role="group" aria-label="Basic example">

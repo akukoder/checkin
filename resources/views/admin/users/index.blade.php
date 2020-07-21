@@ -1,11 +1,11 @@
 @extends('layouts.app', ['title' => __('Users')])
 
 @section('content')
-    @include('partials.header', ['title' => 'Users'])
+    @include('partials.header', ['title' => 'Users', 'class' => 'col-12 col-md-10'])
 
     <div class="container-fluid mt--7">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-md-10">
                 <div class="card shadow">
                     <div class="card-header border-0">
                         <div class="row align-items-center">
