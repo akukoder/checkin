@@ -81,6 +81,12 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link {{ request()->is('admin/permission*') ? 'active' : '' }}" href="{{ route('permission.index') }}">
+                        <i class="fa fa-user-lock"></i> {{ __('Permissions') }}
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link {{ request()->is('admin/settings') ? 'active' : '' }}" href="{{ route('setting.index') }}">
                         <i class="fa fa-cogs"></i> {{ __('Settings') }}
                     </a>
