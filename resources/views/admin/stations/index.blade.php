@@ -54,7 +54,7 @@
                                     </td>
                                     <td>
                                         <a href="{{ route('attendance.index', $station) }}">
-                                            {{ $station->attendances->count() }}
+                                            {{ $station->attendances()->today()->count() }}
                                         </a>
                                     </td>
                                     <td class="text-center">
