@@ -16,12 +16,21 @@
         {{--</form>--}}
         <!-- User -->
         <ul class="navbar-nav align-items-center d-none d-md-flex">
+            @if ($impersonating)
+                <li class="nav-item">
+                    <a href="{{ $url }}" class="nav-link">
+                        <i class="fa fa-users-cog text-danger"></i>
+                        <span class="text-danger">{{ auth()->user()->name }}</span>
+                    </a>
+                </li>
+            @else
             <li class="nav-item">
                 <a href="{{ route('profile.edit') }}" class="nav-link">
                     <i class="ni ni-single-02"></i>
                     <span>{{ auth()->user()->name }}</span>
                 </a>
             </li>
+            @endif
             <li class="nav-item">
                 <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
                     document.getElementById('logout-form').submit();">

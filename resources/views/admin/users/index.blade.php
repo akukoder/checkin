@@ -60,25 +60,38 @@
                                     {{ $user->role_list }}
                                 </td>
                                 <td>
-                                    <a
-                                        href="{{ route('user.edit', $user) }}"
-                                        data-toggle="tooltip"
-                                        title="{{ __('Edit') }}"
-                                        class="btn btn-sm btn-secondary">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
+                                    <div class="btn-group">
 
-                                    @if (auth()->user()->id !== $user->id)
-                                    <a
-                                        href="{{ route('user.destroy', $user) }}"
-                                        class="btn btn-sm btn-secondary btn-delete"
-                                        data-toggle="tooltip"
-                                        title="{{ __('Delete') }}"
-                                        data-target="#user-form-{{ $user->id }}"
-                                    >
-                                        <i class="fa fa-trash text-danger"></i>
-                                    </a>
-                                    @endif
+                                        @if (auth()->user()->id !== $user->id AND auth()->user()->hasPermissionFromRoles('can-impersonate'))
+                                            <a
+                                                href="{{ route('impersonate', $user) }}"
+                                                data-toggle="tooltip"
+                                                title="{{ __('Impersonate') }}"
+                                                class="btn btn-sm btn-warning">
+                                                <i class="fa fa-users-cog"></i>
+                                            </a>
+                                        @endif
+
+                                        <a
+                                            href="{{ route('user.edit', $user) }}"
+                                            data-toggle="tooltip"
+                                            title="{{ __('Edit') }}"
+                                            class="btn btn-sm btn-secondary">
+                                            <i class="fa fa-edit"></i>
+                                        </a>
+
+                                        @if (auth()->user()->id !== $user->id)
+                                        <a
+                                            href="{{ route('user.destroy', $user) }}"
+                                            class="btn btn-sm btn-secondary btn-delete"
+                                            data-toggle="tooltip"
+                                            title="{{ __('Delete') }}"
+                                            data-target="#user-form-{{ $user->id }}"
+                                        >
+                                            <i class="fa fa-trash text-danger"></i>
+                                        </a>
+                                        @endif
+                                    </div>
 
                                     <form id="user-form-{{ $user->id }}" action="{{ route('user.destroy', $user) }}" method="POST" style="display: none;">
                                         @csrf

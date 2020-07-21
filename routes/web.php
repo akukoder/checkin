@@ -27,6 +27,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('permission', 'PermissionController');
     Route::resource('role', 'RoleController');
     Route::resource('station', 'StationController');
+    Route::impersonate();
 
     Route::get('/station/{station}/generate', 'StationController@generate')
         ->name('station.generate');
