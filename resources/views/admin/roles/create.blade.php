@@ -34,6 +34,32 @@
                                 </div>
                             </div><!-- /.form-group -->
 
+                            <div class="form-group row @error('permissions') is-invalid @enderror">
+                                <label class="col-form-label col-12 col-md-3">{{ __('Permissions') }}</label>
+                                <div class="col-12 col-md-5 pt-2">
+                                    @foreach ($permissions as $id => $name)
+                                        <div class="form-check">
+                                            <input
+                                                class="form-check-input"
+                                                type="checkbox"
+                                                name="permissions[]"
+                                                value="{{ $id }}"
+                                                id="permissionCheck{{ $id }}">
+                                            <label class="form-check-label" for="permissionCheck{{ $id }}">
+                                                {{ $name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                @if ($errors->has('permissions'))
+                                    <div class="col-12 col-md-8 offset-md-3">
+                                    <span class="invalid-feedback" style="display: block;" role="alert">
+                                        <strong>{{ $errors->first('permissions') }}</strong>
+                                    </span>
+                                    </div>
+                                @endif
+                            </div><!-- /.form-group -->
+
                             <div class="text-center">
                                 <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
                             </div>

@@ -1,11 +1,11 @@
 @extends('layouts.app', ['title' => __('Edit Role')])
 
 @section('content')
-    @include('partials.header', ['title' => 'Edit Role', 'class' => 'col-12 col-md-6'])
+    @include('partials.header', ['title' => 'Edit Role', 'class' => 'col-12 col-md-8'])
 
     <div class="container-fluid mt--7">
         <div class="row justify-content-center">
-            <div class="col-12 col-md-6">
+            <div class="col-12 col-md-8">
                 <div class="card bg-secondary shadow">
                     <div class="card-header bg-white border-0">
                         <div class="row align-items-center">
@@ -33,6 +33,33 @@
                                         required
                                         autofocus>
                                 </div>
+                            </div><!-- /.form-group -->
+
+                            <div class="form-group row @error('permissions') is-invalid @enderror">
+                                <label class="col-form-label col-12 col-md-3">{{ __('Permissions') }}</label>
+                                <div class="col-12 col-md-5 pt-2">
+                                    @foreach ($permissions as $id => $name)
+                                        <div class="form-check">
+                                            <input
+                                                class="form-check-input"
+                                                type="checkbox"
+                                                name="permissions[]"
+                                                {{ $role->hasPermissionTo($name) ? 'checked' : '' }}
+                                                value="{{ $id }}"
+                                                id="permissionCheck{{ $id }}">
+                                            <label class="form-check-label" for="permissionCheck{{ $id }}">
+                                                {{ $name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                @if ($errors->has('permissions'))
+                                    <div class="col-12 col-md-8 offset-md-3">
+                                    <span class="invalid-feedback" style="display: block;" role="alert">
+                                        <strong>{{ $errors->first('permissions') }}</strong>
+                                    </span>
+                                    </div>
+                                @endif
                             </div><!-- /.form-group -->
 
                             <div class="text-center">

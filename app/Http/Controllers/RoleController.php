@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RoleStoreRequest;
+use App\Permission;
 use App\Role;
 
 class RoleController extends Controller
@@ -22,7 +23,9 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('admin.roles.create');
+        $permissions = Permission::orderBy('name')->pluck('name', 'id');
+
+        return view('admin.roles.create', compact('permissions'));
     }
 
     /**
@@ -31,7 +34,9 @@ class RoleController extends Controller
      */
     public function store(RoleStoreRequest $request)
     {
-        Role::create($request->all());
+        $role = Role::create($request->except('permissions'));
+
+        $role->syncPermissions($request->input('permissions'));
 
         toast(__('Role created!'), 'success');
 
@@ -44,7 +49,9 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        return view('admin.roles.edit', compact('role'));
+        $permissions = Permission::orderBy('name')->pluck('name', 'id');
+
+        return view('admin.roles.edit', compact('role', 'permissions'));
     }
 
     /**
@@ -54,7 +61,9 @@ class RoleController extends Controller
      */
     public function update(RoleStoreRequest $request, Role $role)
     {
-        $role->update($request->all());
+        $role->update($request->except('permissions'));
+
+        $role->syncPermissions($request->input('permissions'));
 
         toast(__('Role updated!'), 'success');
 
