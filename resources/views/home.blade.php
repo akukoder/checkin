@@ -7,8 +7,10 @@
 
         <!-- Header container -->
         <div class="container">
-            <div class="row">
-                <div class="col-xl-4 col-md-6">
+            <div class="row justify-content-center">
+
+                @isallowed('manage-stations')
+                <div class="col">
                     <div class="card card-stats">
                         <!-- Card body -->
                         <div class="card-body text-center">
@@ -26,7 +28,10 @@
                         </div>
                     </div><!-- /.card -->
                 </div>
-                <div class="col-xl-4 col-md-6">
+                @endisallowed
+
+                @isallowed('manage-users')
+                <div class="col">
                     <div class="card card-stats">
                         <!-- Card body -->
                         <div class="card-body text-center">
@@ -44,7 +49,10 @@
                         </div>
                     </div><!-- /.card -->
                 </div>
-                <div class="col-xl-4 col-md-6">
+                @endisallowed
+
+                @isallowed('manage-settings')
+                <div class="col">
                     <div class="card card-stats">
                         <div class="card-body text-center">
                             <div class="mb-3 icon icon-shape bg-gradient-green text-white rounded-circle shadow">
@@ -61,8 +69,10 @@
                         </div>
                     </div><!-- /.card -->
                 </div>
+                @endisallowed
             </div><!-- /.row -->
 
+            @isallowed('view-dashboard-stats')
             <!-- Card stats -->
             <div class="row mt-5">
                 <div class="col-xl-4 col-md-6">
@@ -144,10 +154,12 @@
                     </div>
                 </div>
             </div><!-- /.row -->
+            @endisallowed
         </div>
     </div>
 
     <div class="container mt--7">
+        @isallowed('view-dashboard-stats')
         <div class="row justify-content-center">
             <div class="col-12 col-md-12">
                 <div class="card shadow">
@@ -165,12 +177,14 @@
                 </div><!-- /.card -->
             </div>
         </div><!-- /.row -->
+        @endisallowed
     </div>
 @endsection
 
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <script>
+        @isallowed('view-dashboard-stats')
         let ctx = $('#dashboardChart')
 
         var myLineChart = new Chart(ctx, {
@@ -207,5 +221,6 @@
                 }
             }
         });
+        @endisallowed
     </script>
 @endsection

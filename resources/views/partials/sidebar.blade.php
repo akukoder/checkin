@@ -62,45 +62,45 @@
                     </a>
                 </li>
 
-                @if (auth()->user()->hasPermissionFromRoles('manage-stations'))
+                @isallowed('manage-stations')
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('admin/station*') ? 'active' : '' }}" href="{{ route('station.index') }}">
                         <i class="fa fa-qrcode"></i> {{ __('Stations') }}
                     </a>
                 </li>
-                @endif
+                @endisallowed
 
-                @if (auth()->user()->hasPermissionFromRoles('manage-users'))
+                @isallowed('manage-users')
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('admin/user*') ? 'active' : '' }}" href="{{ route('user.index') }}">
                         <i class="fa fa-users"></i> {{ __('Users') }}
                     </a>
                 </li>
-                @endif
+                @endisallowed
 
-                @if (auth()->user()->hasPermissionFromRoles('manage-roles'))
+                @isallowed('manage-roles')
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('admin/role*') ? 'active' : '' }}" href="{{ route('role.index') }}">
                         <i class="fa fa-user-cog"></i> {{ __('Roles') }}
                     </a>
                 </li>
-                @endif
+                @endisallowed
 
-                @if (auth()->user()->hasPermissionFromRoles('manage-permissions'))
+                @isallowed('manage-permissions')
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('admin/permission*') ? 'active' : '' }}" href="{{ route('permission.index') }}">
                         <i class="fa fa-user-lock"></i> {{ __('Permissions') }}
                     </a>
                 </li>
-                @endif
+                @endisallowed
 
-                @if (auth()->user()->hasPermissionFromRoles('manage-settings'))
+                @isallowed('manage-settings')
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('admin/settings') ? 'active' : '' }}" href="{{ route('setting.index') }}">
                         <i class="fa fa-cogs"></i> {{ __('Settings') }}
                     </a>
                 </li>
-                @endif
+                @endisallowed
 
             </ul>
 
